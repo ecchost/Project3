@@ -1,4 +1,5 @@
-# Project3  (E-Canteen Frontend)
+# Project3  (E-Canteen FrontEnd)
+
 
 1. BRIAN SAYUDHA - 1841720158
 2. EKO SETIO WIJANARKO - 1841720043
