@@ -5,6 +5,8 @@
 3. ARGA DIAZ PRAWIRA YUDHA- 1841720087
 
 # E-Canteen Project System Information
+![alt text](https://i.ibb.co/Pwy7rpt/logo-canteen.png)
+
 
 ## Description
 
