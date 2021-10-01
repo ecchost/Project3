@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\UserIdentifierType;
 
 class CreateUsersTable extends Migration
 {
@@ -20,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->enum('id_type', UserIdentifierType::getValues());
+            $table->string('id_number');
             $table->timestamps();
         });
     }
