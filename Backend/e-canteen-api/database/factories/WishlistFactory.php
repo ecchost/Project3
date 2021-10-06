@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use App\Models\Wishlist;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,7 +23,8 @@ class WishlistFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => User::all()->random()->all(),
+            'content_status' => $this->faker->boolean(),
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\OrderStatusEnum;
 use App\Models\Checkout;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,7 +23,7 @@ class CheckoutFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'order_status' => $this->faker->randomElement(OrderStatusEnum::getValues()),
         ];
     }
 }

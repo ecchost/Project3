@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Checkout;
 use App\Models\CheckoutItem;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CheckoutItemFactory extends Factory
@@ -22,7 +24,9 @@ class CheckoutItemFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'checkout_id' => Checkout::all()->random()->id,
+            'product_id' => Product::all()->random()->id,
+            'item_quantity' => $this->faker->randomDigitNotZero(),
         ];
     }
 }

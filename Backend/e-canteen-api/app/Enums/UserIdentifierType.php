@@ -9,7 +9,6 @@ use BenSampo\Enum\Enum;
  * @method static static NIDN()
  * @method static static NIP()
  * @method static static KTP()
-
  */
 final class UserIdentifierType extends Enum
 {

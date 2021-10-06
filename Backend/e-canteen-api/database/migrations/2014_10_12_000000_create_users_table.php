@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Enums\UserIdentifierType;
+use App\Enums\UserRoleEnum;
 
 class CreateUsersTable extends Migration
 {
@@ -23,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->enum('id_type', UserIdentifierType::getValues());
             $table->string('id_number');
+            $table->enum('role', UserRoleEnum::getValues());
             $table->timestamps();
         });
     }
