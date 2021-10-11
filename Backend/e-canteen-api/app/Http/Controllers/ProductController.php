@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        return ProductResource::collection(
+            QueryBuilder::for(Product::class)
+                ->with(['category','shop'])
+                ->allowedFilters(['price','stock','availability'])
+                ->cursorPaginate(10)
+        );
     }
 
     /**

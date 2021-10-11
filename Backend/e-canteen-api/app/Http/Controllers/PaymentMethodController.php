@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PaymentMethodResource;
 use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class PaymentMethodController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        return PaymentMethodResource::collection(
+            QueryBuilder::for(PaymentMethod::class)
+                ->allowedFilters(['code','category','is_active','is_enable','gateway'])
+                ->cursorPaginate(10)
+        );
     }
 
     /**
