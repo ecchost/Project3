@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CheckoutResource;
 use App\Models\Checkout;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class CheckoutController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        return CheckoutResource::collection(
+            QueryBuilder::for(Checkout::class)
+                ->with(['items'])
+                ->allowedSorts(['accepted_at', 'cancelled_at', 'confirmed_at'])
+                ->allowedFilters(['order_status'])
+                ->cursorPaginate(15)
+        );
     }
 
     /**
