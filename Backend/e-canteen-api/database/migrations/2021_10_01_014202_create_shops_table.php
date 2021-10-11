@@ -15,7 +15,7 @@ class CreateShopsTable extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('user_id')->constrained();
+            $table->foreignId('user_id')->constrained('users');
             $table->string('name');
             $table->string('address');
             $table->string('image')->nullable();

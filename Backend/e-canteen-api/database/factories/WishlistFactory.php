@@ -24,7 +24,7 @@ class WishlistFactory extends Factory
     {
         return [
             'user_id' => User::all()->random()->all(),
-            'content_status' => $this->faker->boolean(),
+            'is_filled' => $this->faker->boolean(),
         ];
     }
 }

@@ -15,7 +15,7 @@ class CreatePaymentMethodsTable extends Migration
     public function up()
     {
         Schema::create('payment_methods', function (Blueprint $table) {
-            $table->bigIncrements('id')->primary();
+            $table->bigIncrements('id');
             $table->string('name');
             $table->string('code');
             $table->enum('category', PaymentMethodCategory::getValues());

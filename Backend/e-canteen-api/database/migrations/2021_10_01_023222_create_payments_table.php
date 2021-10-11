@@ -17,10 +17,11 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('checkout_id')->constrained();
-            $table->foreignUuid('method_id')->constrained('payment_methods');
+            $table->foreignId('method_id')->constrained('payment_methods');
             $table->enum('status', PaymentStatusEnum::getValues());
             $table->integer('amount');
             $table->timestamp('paid_at');
+            $table->string('bank_account');
             $table->timestamps();
         });
     }

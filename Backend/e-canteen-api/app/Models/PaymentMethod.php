@@ -10,6 +10,6 @@ class PaymentMethod extends Model
     use HasFactory;
 
     public function payments(){
-        return $this->hasMany(Payment::class);
+        return $this->hasMany(Payment::class, 'method_id');
     }
 }

@@ -15,7 +15,7 @@ class CreateWishlistsTable extends Migration
     {
         Schema::create('wishlists', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('user_id')->constrained();
+            $table->foreignId('user_id')->constrained('users');
             $table->boolean('is_filled')->default(false);
             $table->timestamps();
         });

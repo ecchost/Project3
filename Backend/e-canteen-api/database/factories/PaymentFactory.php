@@ -25,8 +25,8 @@ class PaymentFactory extends Factory
     public function definition()
     {
         return [
-            'checkout_id' => Checkout::all()->random()->all(),
-            'payment_method' => PaymentMethod::all()->random()->all(),
+            'checkout_id' => Checkout::all()->random()->id,
+            'method_id' => PaymentMethod::all()->random()->id,
             'status' => $this->faker->randomElement(PaymentStatusEnum::getValues()),
             'amount' => $this->faker->randomDigitNotZero(),
             'paid_at' => $this->faker->dateTimeThisMonth(),

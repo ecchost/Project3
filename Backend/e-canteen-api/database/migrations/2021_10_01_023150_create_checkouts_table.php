@@ -16,6 +16,7 @@ class CreateCheckoutsTable extends Migration
     {
         Schema::create('checkouts', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->foreignId('user_id')->constrained('users');
             $table->enum('order_status', OrderStatusEnum::getValues());
             $table->timestamp('confirmed_at')->nullable();
             $table->timestamp('accepted_at')->nullable();

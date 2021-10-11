@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Product;
 use App\Models\Review;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ReviewFactory extends Factory
@@ -24,6 +25,7 @@ class ReviewFactory extends Factory
     {
         return [
             'product_id' => Product::all()->random()->id,
+            'user_id' => User::all()->random()->id,
             'ratings' => $this->faker->randomElement(range(1,5)),
             'description' => $this->faker->sentence(),
         ];

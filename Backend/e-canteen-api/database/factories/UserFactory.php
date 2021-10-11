@@ -25,15 +25,14 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'rfid_id' => $this->faker->randomDigit(),
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
 //            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'password' => Hash::make($this->faker->password()),
             'remember_token' => Str::random(10),
-            'identifier_type' => $this->faker->randomElement(UserIdentifierType::getValues()),
-            'identifier_number' => $this->faker->randomDigitNotNull()
+            'id_type' => $this->faker->randomElement(UserIdentifierType::getValues()),
+            'id_number' => $this->faker->randomDigitNotNull()
         ];
     }
 
