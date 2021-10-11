@@ -14,7 +14,7 @@ class CheckoutItem extends Model
         return $this->belongsTo(Checkout::class);
     }
 
-    public function products(){
+    public function product(){
         return $this->belongsTo(Product::class);
     }
 }

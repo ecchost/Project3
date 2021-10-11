@@ -18,4 +18,10 @@ class Checkout extends Model
         return $this->belongsTo(User::class);
     }
 
+    protected function getTotalPriceAttribute(){
+        return $this->items->map(function (CheckoutItem $item){
+            return $item['item_quantity'] * $item->product['price'];
+        });
+    }
+
 }

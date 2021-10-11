@@ -19,6 +19,7 @@ class CheckoutResource extends JsonResource
             'id' => $this['id'],
             'user' => UserResource::make($this->whenLoaded('user')),
             'items' => CheckoutItemResource::collection($this->whenLoaded('items')),
+            'total_price' => $this['total_price']->sum(),
             'order_status' => $this['order_status'],
             'confirmed_at' => $this['confirmed_at'],
             'accepted_at' => $this['accepted_at'],
