@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\CheckoutItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,8 @@ use App\Http\Controllers\CheckoutController;
 
 Route::get('category', [CategoryController::class, 'index']);
 Route::get('checkout', [CheckoutController::class, 'index']);
+Route::get('payment', [PaymentController::class, 'index']);
+Route::get('checkout-item', [CheckoutItemController::class, 'index']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

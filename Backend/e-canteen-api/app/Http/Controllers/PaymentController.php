@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PaymentResource;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class PaymentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return PaymentResource::collection(
+            QueryBuilder::for(Payment::class)
+                ->with(['checkout', 'method'])
+                ->allowedSorts(['paid_at'])
+                ->allowedFilters(['status', 'paid_at', 'bank_account'])
+                ->cursorPaginate(10)
+        );
     }
 
     /**

@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CheckoutItemResource;
 use App\Models\CheckoutItem;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class CheckoutItemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        return CheckoutItemResource::collection(
+            QueryBuilder::for(CheckoutItem::class)
+                ->allowedSorts(['item_quantity'])
+                ->cursorPaginate(10)
+        );
     }
 
     /**
