@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\WishlistItemResource;
 use App\Models\WishlistItem;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class WishlistItemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        return WishlistItemResource::collection(
+            QueryBuilder::for(WishlistItem::class)
+                ->with(['product'])
+                ->cursorPaginate()
+        );
     }
 
     /**

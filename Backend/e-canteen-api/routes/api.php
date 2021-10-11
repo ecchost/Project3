@@ -8,6 +8,9 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CheckoutItemController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\WishlistItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +27,11 @@ Route::get('category', [CategoryController::class, 'index']);
 Route::get('checkout', [CheckoutController::class, 'index']);
 Route::get('payment', [PaymentController::class, 'index']);
 Route::get('checkout-item', [CheckoutItemController::class, 'index']);
-Route::get('payment_method', [CheckoutItemController::class, 'index']);
+Route::get('payment_method', [PaymentMethodController::class, 'index']);
 Route::get('product', [ProductController::class, 'index']);
+Route::get('shop', [ShopController::class, 'index']);
+Route::get('wishlist', [WishlistItemController::class, 'index']);
+Route::get('wishlist-item', [WishlistController::class,'index']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

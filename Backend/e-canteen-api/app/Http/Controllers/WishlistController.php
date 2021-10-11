@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\WishlistResource;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class WishlistController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        return WishlistResource::collection(
+            QueryBuilder::for(Wishlist::class)
+                ->with(['user','items'])
+                ->allowedFilters(['is_filled'])
+                ->cursorPaginate(10)
+        );
     }
 
     /**
