@@ -25,6 +25,7 @@ class ShopFactory extends Factory
         return [
             'user_id' => User::all()->random()->id,
             'name' => $this->faker->word(),
+            'slug' => $this->faker->slug(),
             'address' => $this->faker->address(),
             'image' => $this->faker->imageUrl(),
             'is_open' => $this->faker->boolean()

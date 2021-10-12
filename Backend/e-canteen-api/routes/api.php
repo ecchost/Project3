@@ -29,10 +29,16 @@ Route::get('payment', [PaymentController::class, 'index']);
 Route::get('checkout-item', [CheckoutItemController::class, 'index']);
 Route::get('payment_method', [PaymentMethodController::class, 'index']);
 Route::get('product', [ProductController::class, 'index']);
-Route::get('shop', [ShopController::class, 'index']);
 Route::get('wishlist', [WishlistItemController::class, 'index']);
 Route::get('wishlist-item', [WishlistController::class,'index']);
 
+Route::apiResource('shop', ShopController::class)
+    ->only([
+    'index', 'show'
+])
+    ->scoped([
+    'shop' => 'slug'
+]);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

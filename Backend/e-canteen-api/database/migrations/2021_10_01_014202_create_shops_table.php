@@ -17,6 +17,7 @@ class CreateShopsTable extends Migration
             $table->uuid('id')->primary();
             $table->foreignId('user_id')->constrained('users');
             $table->string('name');
+            $table->string('slug');
             $table->string('address');
             $table->string('image')->nullable();
             $table->boolean('is_open')->default(false);
