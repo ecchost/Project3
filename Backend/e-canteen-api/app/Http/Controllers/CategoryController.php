@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\BaseResponse\BaseResponse;
 use App\Http\Resources\CategoryResource;
+use App\Http\Resources\ShowCategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -40,15 +42,14 @@ class CategoryController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Category $category)
     {
-        //
+        $category->load([
+            'products.shop'
+        ]);
+
+        return BaseResponse::make(ShowCategoryResource::make($category));
     }
 
     /**

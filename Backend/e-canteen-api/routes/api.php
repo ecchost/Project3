@@ -23,7 +23,6 @@ use App\Http\Controllers\WishlistItemController;
 |
 */
 
-Route::get('category', [CategoryController::class, 'index']);
 Route::get('checkout', [CheckoutController::class, 'index']);
 Route::get('payment', [PaymentController::class, 'index']);
 Route::get('checkout-item', [CheckoutItemController::class, 'index']);
@@ -31,6 +30,14 @@ Route::get('payment_method', [PaymentMethodController::class, 'index']);
 Route::get('product', [ProductController::class, 'index']);
 Route::get('wishlist', [WishlistItemController::class, 'index']);
 Route::get('wishlist-item', [WishlistController::class,'index']);
+
+Route::apiResource('category', CategoryController::class)
+    ->only([
+        'index', 'show'
+    ])
+    ->scoped([
+        'category' => 'slug'
+    ]);
 
 Route::apiResource('shop', ShopController::class)
     ->only([

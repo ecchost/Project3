@@ -29,4 +29,10 @@ class Product extends Model
     public function reviews(){
         return $this->hasMany(Review::class);
     }
+
+    protected function getTotalRatingsAttribute(){
+        return $this->reviews->map(function (Review $review){
+            return $review['ratings'];
+        });
+    }
 }
