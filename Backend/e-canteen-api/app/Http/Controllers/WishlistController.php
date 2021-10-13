@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\BaseResponse\BaseResponse;
 use App\Http\Resources\WishlistResource;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
@@ -41,15 +42,14 @@ class WishlistController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Wishlist  $wishlist
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Wishlist $wishlist)
     {
-        //
+        $wishlist->load([
+            'items.product'
+        ]);
+
+        return BaseResponse::make(WishlistResource::make($wishlist));
     }
 
     /**

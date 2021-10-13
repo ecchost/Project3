@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\BaseResponse\BaseResponse;
 use App\Http\Resources\ProductResource;
+use App\Http\Resources\ShowProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -41,15 +43,16 @@ class ProductController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Product $product)
     {
-        //
+        $product->load([
+            'category',
+            'shop',
+            'reviews.user'
+        ]);
+
+        return BaseResponse::make(ShowProductResource::make($product));
     }
 
     /**
@@ -60,7 +63,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+
     }
 
     /**

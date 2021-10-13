@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\UuidIndex;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -28,6 +29,16 @@ class Product extends Model
 
     public function reviews(){
         return $this->hasMany(Review::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function (Model $model){
+            $slug = Str::slug($model['name']);
+            $model['slug'] = $slug;
+        });
     }
 
     protected function getTotalRatingsAttribute(){
