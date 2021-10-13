@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\BaseResponse\BaseResponse;
 use App\Http\Resources\CheckoutResource;
 use App\Models\Checkout;
 use Illuminate\Http\Request;
@@ -39,18 +40,18 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Checkout  $checkout
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Checkout $checkout)
     {
-        //
+        $checkout->load([
+            'user',
+            'items.product.shop'
+        ]);
+
+        return BaseResponse::make(CheckoutResource::make($checkout));
     }
 
     /**

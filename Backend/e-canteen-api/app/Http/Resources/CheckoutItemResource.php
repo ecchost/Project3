@@ -16,7 +16,7 @@ class CheckoutItemResource extends JsonResource
     {
         return [
             'id' => $this['id'],
-            'product' => ProductResource::make($this->whenLoaded('products')),
+            'product' => ProductResource::make($this->whenLoaded('product')),
             'item_quantity' => $this['item_quantity']
         ];
     }

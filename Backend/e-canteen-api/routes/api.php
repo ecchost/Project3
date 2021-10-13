@@ -23,7 +23,6 @@ use App\Http\Controllers\WishlistItemController;
 |
 */
 
-Route::get('checkout', [CheckoutController::class, 'index']);
 Route::get('payment', [PaymentController::class, 'index']);
 Route::get('checkout-item', [CheckoutItemController::class, 'index']);
 Route::get('payment_method', [PaymentMethodController::class, 'index']);
@@ -46,6 +45,11 @@ Route::apiResource('shop', ShopController::class)
     ->scoped([
     'shop' => 'slug'
 ]);
+
+Route::apiResource('checkout', CheckoutController::class)
+    ->only([
+        'index', 'show'
+    ]);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
