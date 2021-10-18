@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Classes\BaseResponse\BaseResponse;
+use App\Http\Requests\StoreCategory;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\ShowCategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class CategoryController extends Controller
@@ -21,25 +23,9 @@ class CategoryController extends Controller
         );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(StoreCategory $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        BaseResponse::make(Category::create($request->validated()));
     }
 
 
@@ -52,37 +38,19 @@ class CategoryController extends Controller
         return BaseResponse::make(ShowCategoryResource::make($category));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $category)
+
+    public function update(StoreCategory $request, Category $category)
     {
-        //
+        $category->update($request->validated() + [
+            'slug' => Str::slug($request->get('name')),
+            ]);
+        return BaseResponse::make($category->refresh());
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Category $category)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Category $category)
     {
-        //
+        abort_if($category->products()->exists(), 403, 'This Category already have products');
+        return BaseResponse::make($category->delete());
     }
 }

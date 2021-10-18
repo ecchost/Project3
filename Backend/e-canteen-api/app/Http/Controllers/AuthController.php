@@ -6,6 +6,7 @@ use App\Classes\BaseResponse\BaseResponse;
 use App\Models\User;
 use App\Traits\ThrottleLogin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -49,7 +50,7 @@ class AuthController extends Controller
         $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
 
         return BaseResponse::make([
-            'message' => 'token revoked',
+            'message' => 'Logged Out',
         ]);
     }
 

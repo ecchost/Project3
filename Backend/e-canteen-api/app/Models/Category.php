@@ -11,6 +11,9 @@ class Category extends Model
 {
     use HasFactory, NodeTrait;
 
+    protected $fillable = [
+        'name', 'image', '_lft', '_rgt', 'parent_id', 'slug'];
+
     public function products(){
         return $this->hasMany(Product::class, 'category_id');
     }

@@ -66,6 +66,18 @@ Route::apiResource('product', ProductController::class)
         'product' => 'slug'
     ]);
 
+
+
+
+
+Route::group(['middleware' => ['auth:sanctum', 'roleLevel:admin']], function () {
+//    Route::post('category', [CategoryController::class, 'store']);
+    Route::apiResource('category', CategoryController::class)->only([
+        'store', 'update', 'destroy'
+    ]);
+});
+
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('logout', [AuthController::class, 'logout']);
 });

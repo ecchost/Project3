@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentResource extends JsonResource
 {
@@ -21,7 +22,7 @@ class PaymentResource extends JsonResource
             'status' => $this['status'],
             'amount' => $this['amount'],
             'paid_at' => $this['paid_at'],
-            'bank_account' => $this['bank_account']
+            'bank_account' => $this['bank_account'],
         ];
     }
 }
