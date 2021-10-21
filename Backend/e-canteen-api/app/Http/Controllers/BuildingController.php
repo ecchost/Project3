@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\BaseResponse\BaseResponse;
+use App\Http\Requests\StoreBuilding;
 use App\Http\Resources\BuildingResource;
 use App\Models\Building;
 use Illuminate\Http\Request;
@@ -20,39 +22,23 @@ class BuildingController extends Controller
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(StoreBuilding $request)
     {
-        //
+        BaseResponse::make(Building::create($request->validated()));
     }
 
 
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Building  $building
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Building $building)
+    public function update(StoreBuilding $request, Building $building)
     {
-        //
+        $building->update($request->validated());
+
+        return BaseResponse::make($building->refresh());
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Building  $building
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Building $building)
     {
-        //
+        abort_if($building->addresses()->exists(), 403, 'This building already have included in shop location');
+        return BaseResponse::make($building->delete());
     }
 }
