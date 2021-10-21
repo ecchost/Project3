@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Building;
 use App\Models\Category;
 use App\Models\Checkout;
 use App\Models\CheckoutItem;
@@ -10,6 +11,7 @@ use App\Models\PaymentMethod;
 use App\Models\Product;
 use App\Models\Review;
 use App\Models\Shop;
+use App\Models\ShopAddress;
 use App\Models\User;
 use App\Models\Wishlist;
 use App\Models\WishlistItem;
@@ -25,6 +27,8 @@ class DummySeeder extends Seeder
     public function run()
     {
         Category::factory(10)->create();
+        Building::factory(8)
+            ->has(ShopAddress::factory(1),'addresses')->create();
 
         User::factory(3)
             ->has(Shop::factory(1)

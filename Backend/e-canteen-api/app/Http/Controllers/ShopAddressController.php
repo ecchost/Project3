@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ReviewResource;
-use App\Models\Review;
+use App\Http\Resources\ShopAddressResource;
+use App\Models\ShopAddress;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class ReviewController extends Controller
+class ShopAddressController extends Controller
 {
 
     public function index()
     {
-        return ReviewResource::collection(
-            QueryBuilder::for(Review::class)
-                ->with(['product','user'])
-                ->allowedSorts(['ratings'])
-                ->allowedFilters(['ratings'])
+        return ShopAddressResource::collection(
+            QueryBuilder::for(ShopAddress::class)
+                ->with('building')
+                ->allowedSorts(['floor'])
+                ->allowedFilters(['floor'])
                 ->cursorPaginate(10)
         );
     }
@@ -45,10 +45,10 @@ class ReviewController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Review  $review
+     * @param  \App\Models\ShopAddress  $shopAddress
      * @return \Illuminate\Http\Response
      */
-    public function show(Review $review)
+    public function show(ShopAddress $shopAddress)
     {
         //
     }
@@ -56,10 +56,10 @@ class ReviewController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Review  $review
+     * @param  \App\Models\ShopAddress  $shopAddress
      * @return \Illuminate\Http\Response
      */
-    public function edit(Review $review)
+    public function edit(ShopAddress $shopAddress)
     {
         //
     }
@@ -68,10 +68,10 @@ class ReviewController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Review  $review
+     * @param  \App\Models\ShopAddress  $shopAddress
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Review $review)
+    public function update(Request $request, ShopAddress $shopAddress)
     {
         //
     }
@@ -79,10 +79,10 @@ class ReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Review  $review
+     * @param  \App\Models\ShopAddress  $shopAddress
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Review $review)
+    public function destroy(ShopAddress $shopAddress)
     {
         //
     }

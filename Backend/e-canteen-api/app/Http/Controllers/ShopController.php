@@ -16,7 +16,7 @@ class ShopController extends Controller
     {
         return ShopResource::collection(
             QueryBuilder::for(Shop::class)
-                ->with('user')
+                ->with(['user', 'location'])
                 ->allowedFilters(['name'])
                 ->cursorPaginate(10)
         );

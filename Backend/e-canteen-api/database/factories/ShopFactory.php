@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Shop;
+use App\Models\ShopAddress;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -26,7 +27,7 @@ class ShopFactory extends Factory
             'user_id' => User::all()->random()->id,
             'name' => $this->faker->word(),
             'slug' => $this->faker->slug(),
-            'address' => $this->faker->address(),
+            'location_id' => ShopAddress::all()->random()->id,
             'image' => $this->faker->imageUrl(),
             'is_open' => $this->faker->boolean()
         ];

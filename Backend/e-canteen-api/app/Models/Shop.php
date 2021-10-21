@@ -19,6 +19,10 @@ class Shop extends Model
         return $this->hasMany(Product::class);
     }
 
+    public function location(){
+        return $this->belongsTo(ShopAddress::class, 'location_id');
+    }
+
     protected static function boot()
     {
         parent::boot();

@@ -12,6 +12,9 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\WishlistItemController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ShopAddressController;
+use App\Http\Controllers\BuildingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +34,9 @@ Route::get('checkout-item', [CheckoutItemController::class, 'index']);
 Route::get('payment_method', [PaymentMethodController::class, 'index']);
 Route::get('wishlist', [WishlistItemController::class, 'index']);
 Route::get('wishlist-item', [WishlistController::class,'index']);
+Route::get('reviews', [ReviewController::class, 'index']);
+Route::get('shop-location', [ShopAddressController::class, 'index']);
+Route::get('building', [BuildingController::class, 'index']);
 
 Route::apiResource('category', CategoryController::class)
     ->only([
