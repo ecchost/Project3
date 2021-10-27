@@ -88,13 +88,27 @@ Route::apiResource('product', ProductController::class)
 
 
 Route::group(['middleware' => ['auth:sanctum', 'roleLevel:admin']], function () {
-//    Route::post('category', [CategoryController::class, 'store']);
     Route::apiResource('category', CategoryController::class)->only([
         'store', 'update', 'destroy'
     ]);
     Route::apiResource('building', BuildingController::class)
         ->only([
             'store', 'update', 'destroy'
+        ]);
+
+    Route::apiResource('shop', ShopController::class)
+        ->only([
+            'store', 'destroy'
+        ]);
+
+
+});
+
+Route::group(['middleware' => ['auth:sanctum', 'roleLevel:merchant']], function () {
+
+    Route::apiResource('shop', ShopController::class)
+        ->only([
+            'update', 'destroy'
         ]);
 
 

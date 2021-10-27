@@ -24,10 +24,10 @@ class StoreShop extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|exist:users,id',
-            'location_id' => 'required|exist:shop_addresses,id',
-            'name' => 'required:unique:shops',
-            'image' => 'nullable'
+            'user_id' => 'required|exists:users,id',
+            'location_id' => 'required|exists:shop_addresses,id',
+            'name' => 'required|unique:shops',
+            'image' => 'nullable',
         ];
     }
 }

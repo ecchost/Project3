@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Classes\BaseResponse\BaseResponse;
 use App\Http\Requests\StoreShop;
+use App\Http\Requests\UpdateShop;
 use App\Http\Resources\ShopResource;
 use App\Http\Resources\ShowShopResource;
 use App\Models\Shop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ShopController extends Controller
@@ -25,7 +27,9 @@ class ShopController extends Controller
 
     public function store(StoreShop $request)
     {
-        BaseResponse::make($request->validated());
+        BaseResponse::make(Shop::create($request->validated() +[
+            'is_open' => false
+            ]));
     }
 
 
@@ -40,17 +44,13 @@ class ShopController extends Controller
     }
 
 
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Shop  $shop
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Shop $shop)
+    public function update(UpdateShop $request, Shop $shop)
     {
-        //
+        $shop->update($request->validated() + [
+                'slug' => Str::slug($request->get('name')),
+            ]);
+
+        return BaseResponse::make($shop->refresh());
     }
 
     /**

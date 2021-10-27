@@ -11,6 +11,12 @@ class Shop extends Model
 {
     use HasFactory, UuidIndex;
 
+    protected $table = 'shops';
+
+    protected $fillable = [
+        'user_id', 'location_id', 'name', 'slug', 'image' , 'is_open'
+    ];
+
     public function user(){
         return $this->belongsTo(User::class);
     }
