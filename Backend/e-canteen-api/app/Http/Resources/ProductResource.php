@@ -24,7 +24,7 @@ class ProductResource extends JsonResource
                 'price' => $this['price'],
                 'stock' => $this['stock'],
                 'image' => $this['image'],
-                'ratings' => (($this['total_ratings']->sum()) / $this['total_ratings']->count()) ,
+                'total_ratings' => (($this['total_ratings']->sum()) / $this['total_ratings']->count()) ,
                 'availability' => $this['availability'],
                 'description' => $this['description'],
             ];
@@ -38,7 +38,7 @@ class ProductResource extends JsonResource
                 'price' => $this['price'],
                 'stock' => $this['stock'],
                 'image' => $this['image'],
-                'ratings' => 'Not Rated Yet',
+                'total_ratings' => null,
                 'availability' => $this['availability'],
                 'description' => $this['description'],
             ];

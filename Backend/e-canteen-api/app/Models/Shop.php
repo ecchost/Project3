@@ -33,4 +33,22 @@ class Shop extends Model
         });
     }
 
+    protected function getFoodCategoryAttribute(){
+        return $this->products->map(function (Product $product){
+            return $product->category['name'];
+        });
+    }
+
+    protected function getRatingCountAttribute(){
+        return $this->products->map(function (Product $product){
+            return $product['total_ratings']->count();
+        });
+    }
+
+    protected function getShopRatingAttribute(){
+        return $this->products->map(function (Product $product){
+            return $product['total_ratings']->sum();
+        });
+    }
+
 }

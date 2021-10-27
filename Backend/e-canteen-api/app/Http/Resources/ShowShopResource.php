@@ -18,6 +18,10 @@ class ShowShopResource extends JsonResource
             'id'=> $this['id'],
             'name' => $this['name'],
             'slug' => $this['slug'],
+            'food_category' => $this['food_category'],
+            'rating_count' => $this['rating_count']->sum(),
+            'shop_rating' => $this['shop_rating']->sum() / $this['rating_count']->sum(),
+            'location' =>  ShopAddressResource::make($this->whenLoaded('location')),
             'image' => $this['image'],
             'is_open' => $this['is_open'],
             'product' => ProductResource::collection($this->whenLoaded('products'))

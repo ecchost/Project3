@@ -17,7 +17,7 @@ class ShopController extends Controller
     {
         return ShopResource::collection(
             QueryBuilder::for(Shop::class)
-                ->with(['user', 'location'])
+                ->with(['user', 'location.building'])
                 ->allowedFilters(['name'])
                 ->cursorPaginate(10)
         );
@@ -32,7 +32,8 @@ class ShopController extends Controller
     public function show(Shop $shop)
     {
         $shop->load([
-           'products.category'
+           'products.category',
+            'location.building'
         ]);
 
         return BaseResponse::make(ShowShopResource::make($shop));
