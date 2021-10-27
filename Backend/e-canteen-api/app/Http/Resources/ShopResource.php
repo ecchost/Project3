@@ -16,7 +16,6 @@ class ShopResource extends JsonResource
     {
         return [
             'id'=> $this['id'],
-            'user' => UserResource::make($this->whenLoaded('user')),
             'location' => ShopAddressResource::make($this->whenLoaded('location')) ,
             'name' => $this['name'],
             'slug' => $this['slug'],

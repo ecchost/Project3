@@ -9,6 +9,14 @@ class ShopAddress extends Model
 {
     use HasFactory;
 
+//    protected $table = 'shop_addresses';
+
+    protected $fillable = [
+        'building_id', 'floor', 'specific_location'
+    ];
+
+//    protected $primaryKey = 'id';
+
     public function building(){
         return $this->belongsTo(Building::class);
     }

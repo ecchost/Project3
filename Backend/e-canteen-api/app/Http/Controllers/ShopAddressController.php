@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\BaseResponse\BaseResponse;
+use App\Http\Requests\StoreShopAddress;
 use App\Http\Resources\ShopAddressResource;
+use App\Http\Resources\ShowShopLocation;
 use App\Models\ShopAddress;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -21,69 +24,32 @@ class ShopAddressController extends Controller
         );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function store(StoreShopAddress $request)
     {
-        //
+        BaseResponse::make(ShopAddress::create($this->validated()));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+
+    public function show(ShopAddress $shopAddress){
+        $shopAddress->load([
+            'shops'
+        ]);
+
+        return BaseResponse::make(ShowShopLocation::make($shopAddress));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ShopAddress  $shopAddress
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ShopAddress $shopAddress)
+
+    public function update(StoreShopAddress $request, ShopAddress $shopAddress)
     {
-        //
+        $shopAddress->update($request->validated());
+
+        return BaseResponse::make($shopAddress->refresh());
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ShopAddress  $shopAddress
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ShopAddress $shopAddress)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ShopAddress  $shopAddress
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ShopAddress $shopAddress)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ShopAddress  $shopAddress
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(ShopAddress $shopAddress)
     {
-        //
+        abort_if($shopAddress->shops()->exists(), 403, 'This Location Detail Already Have Shops/Canteen');
+        return BaseResponse::make($shopAddress->delete());
     }
 }

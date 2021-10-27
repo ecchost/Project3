@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ShopAddressResource extends JsonResource
+class ShowShopBasedOnBuilding extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,10 +15,8 @@ class ShopAddressResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this['id'],
-            'building' => BuildingResource::make($this->whenLoaded('building')),
-            'floor' => $this['floor'],
-            'specific_location' => $this['specific_location']
+            'building' => $this['name'],
+            'location' => ShowShopLocation::collection($this->whenLoaded('addresses'))
         ];
     }
 }

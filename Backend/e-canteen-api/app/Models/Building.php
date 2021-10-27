@@ -9,6 +9,11 @@ class Building extends Model
 {
     use HasFactory;
 
+    protected $table = 'buildings';
+    protected $fillable = [
+        'name'
+    ];
+
     public function addresses(){
         return $this->hasMany(ShopAddress::class, 'building_id');
     }

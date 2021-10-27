@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\BaseResponse\BaseResponse;
+use App\Http\Requests\StoreShop;
 use App\Http\Resources\ShopResource;
 use App\Http\Resources\ShowShopResource;
 use App\Models\Shop;
@@ -22,25 +23,9 @@ class ShopController extends Controller
         );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(StoreShop $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        BaseResponse::make($request->validated());
     }
 
 
@@ -53,16 +38,7 @@ class ShopController extends Controller
         return BaseResponse::make(ShowShopResource::make($shop));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Shop  $shop
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Shop $shop)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.

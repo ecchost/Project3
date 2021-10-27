@@ -31,12 +31,23 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::get('payment', [PaymentController::class, 'index']);
 Route::get('checkout-item', [CheckoutItemController::class, 'index']);
-Route::get('payment_method', [PaymentMethodController::class, 'index']);
+Route::get('payment-method', [PaymentMethodController::class, 'index']);
 Route::get('wishlist', [WishlistItemController::class, 'index']);
 Route::get('wishlist-item', [WishlistController::class,'index']);
 Route::get('reviews', [ReviewController::class, 'index']);
-Route::get('shop-location', [ShopAddressController::class, 'index']);
-Route::get('building', [BuildingController::class, 'index']);
+
+Route::apiResource('shop-address', ShopAddressController::class)
+    ->only([
+        'index', 'show'
+    ]);
+
+Route::apiResource('building', BuildingController::class)
+    ->only([
+        'index', 'show', 'store'
+    ])
+    ->scoped([
+        'building' => 'name'
+    ]);
 
 Route::apiResource('category', CategoryController::class)
     ->only([
@@ -81,6 +92,12 @@ Route::group(['middleware' => ['auth:sanctum', 'roleLevel:admin']], function () 
     Route::apiResource('category', CategoryController::class)->only([
         'store', 'update', 'destroy'
     ]);
+    Route::apiResource('building', BuildingController::class)
+        ->only([
+            'store', 'update', 'destroy'
+        ]);
+
+
 });
 
 

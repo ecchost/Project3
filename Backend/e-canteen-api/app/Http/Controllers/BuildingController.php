@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Classes\BaseResponse\BaseResponse;
 use App\Http\Requests\StoreBuilding;
 use App\Http\Resources\BuildingResource;
+use App\Http\Resources\ShowShopBasedOnBuilding;
 use App\Models\Building;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -33,6 +34,15 @@ class BuildingController extends Controller
         $building->update($request->validated());
 
         return BaseResponse::make($building->refresh());
+    }
+
+    public function show(Building $building){
+        $building->load([
+            'addresses',
+            'addresses.shops'
+        ]);
+
+        return BaseResponse::make(ShowShopBasedOnBuilding::make($building));
     }
 
 
