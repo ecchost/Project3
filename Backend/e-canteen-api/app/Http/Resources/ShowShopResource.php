@@ -14,17 +14,32 @@ class ShowShopResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'id'=> $this['id'],
-            'name' => $this['name'],
-            'slug' => $this['slug'],
-            'food_category' => $this['food_category'],
-            'rating_count' => $this['rating_count']->sum(),
-            'shop_rating' => $this['shop_rating']->sum() / $this['rating_count']->sum(),
-            'location' =>  ShopAddressResource::make($this->whenLoaded('location')),
-            'image' => $this['image'],
-            'is_open' => $this['is_open'],
-            'product' => ProductResource::collection($this->whenLoaded('products'))
-        ];
+        if ($this['rating_count']->sum() !== 0) {
+            return [
+                'id' => $this['id'],
+                'name' => $this['name'],
+                'slug' => $this['slug'],
+                'food_category' => $this['food_category'],
+                'rating_count' => $this['rating_count']->sum(),
+                'shop_rating' => $this['shop_rating']->sum() / $this['rating_count']->sum(),
+                'location' => ShopAddressResource::make($this->whenLoaded('location')),
+                'image' => $this['image'],
+                'is_open' => $this['is_open'],
+                'product' => ProductResource::collection($this->whenLoaded('products'))
+            ];
+        }else{
+            return [
+                'id' => $this['id'],
+                'name' => $this['name'],
+                'slug' => $this['slug'],
+                'food_category' => $this['food_category'],
+                'rating_count' => null,
+                'shop_rating' => null,
+                'location' => ShopAddressResource::make($this->whenLoaded('location')),
+                'image' => $this['image'],
+                'is_open' => $this['is_open'],
+                'product' => ProductResource::collection($this->whenLoaded('products'))
+            ];
+        }
     }
 }

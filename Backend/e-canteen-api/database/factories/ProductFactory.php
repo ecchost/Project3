@@ -29,7 +29,6 @@ class ProductFactory extends Factory
             'name' => $this->faker->word(),
             'slug' => $this->faker->slug(),
             'price' => $this->faker->randomDigitNotZero(),
-            'stock' => $this->faker->randomDigitNotZero(),
             'image' => $this->faker->imageUrl(),
             'description' => $this->faker->sentence(),
         ];
