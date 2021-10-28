@@ -15,8 +15,10 @@ class CreateProductVariantsTable extends Migration
     {
         Schema::create('product_variants', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignUuid('product_id')->constrained('product');
-            $table->foreignUuid('variant_id')->constrained('variant');
+            $table->foreignUuid('product_id')->constrained('products');
+            $table->foreignUuid('variant_id')->constrained('variants');
+            $table->integer('price');
+            $table->integer('stock');
             $table->string('value');
             $table->timestamps();
         });

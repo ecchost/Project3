@@ -21,12 +21,14 @@ class ProductResource extends JsonResource
                 'shop' => ShopResource::make($this->whenLoaded('shop')),
                 'name' => $this['name'],
                 'slug' => $this['slug'],
+                'variant' => ProductVariantResource::collection($this->whenLoaded('variants')),
                 'price' => $this['price'],
-                'stock' => $this['stock'],
                 'image' => $this['image'],
-                'total_ratings' => (($this['total_ratings']->sum()) / $this['total_ratings']->count()) ,
-                'availability' => $this['availability'],
+                'total_ratings' => (($this['total_ratings']->sum()) / $this['total_ratings']->count()),
+                'sku' => SKUResource::collection($this->whenLoaded('skus')) ,
                 'description' => $this['description'],
+                'selling_plan' => SellingPlanResource::collection($this->whenLoaded('sellPlans')),
+
             ];
         }else{
             return [
@@ -35,12 +37,13 @@ class ProductResource extends JsonResource
                 'shop' => ShopResource::make($this->whenLoaded('shop')),
                 'name' => $this['name'],
                 'slug' => $this['slug'],
+                'variant' => ProductVariantResource::collection($this->whenLoaded('variants')),
                 'price' => $this['price'],
-                'stock' => $this['stock'],
                 'image' => $this['image'],
                 'total_ratings' => null,
-                'availability' => $this['availability'],
+                'sku' => SKUResource::collection($this->whenLoaded('skus')) ,
                 'description' => $this['description'],
+                'selling_plan' => SellingPlanResource::collection($this->whenLoaded('sellPlans'))
             ];
         }
     }

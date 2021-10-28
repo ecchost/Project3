@@ -15,6 +15,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ShopAddressController;
 use App\Http\Controllers\BuildingController;
+use App\Http\Controllers\SKUController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Route::get('payment-method', [PaymentMethodController::class, 'index']);
 Route::get('wishlist', [WishlistItemController::class, 'index']);
 Route::get('wishlist-item', [WishlistController::class,'index']);
 Route::get('reviews', [ReviewController::class, 'index']);
+Route::get('sku', [SKUController::class, 'index']);
 
 Route::apiResource('shop-address', ShopAddressController::class)
     ->only([

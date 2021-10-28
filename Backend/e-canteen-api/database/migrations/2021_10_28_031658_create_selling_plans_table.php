@@ -16,11 +16,14 @@ class CreateSellingPlansTable extends Migration
     {
         Schema::create('selling_plans', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('product_id')->primary();
+            $table->foreignUuid('product_id');
             $table->integer('price');
+            $table->integer('stock');
             $table->string('description');
             $table->enum('status', ProductSellStatus::getValues());
             $table->boolean('is_active');
+            $table->timestamp('start');
+            $table->timestamp('finish')->nullable();
             $table->timestamps();
         });
     }

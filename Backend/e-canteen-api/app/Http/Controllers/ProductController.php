@@ -16,7 +16,7 @@ class ProductController extends Controller
     {
         return ProductResource::collection(
             QueryBuilder::for(Product::class)
-                ->with(['category','shop'])
+                ->with(['category','shop', 'variants.variant', 'sellPlans', 'skus'])
                 ->allowedFilters(['price','stock','availability'])
                 ->cursorPaginate(10)
         );

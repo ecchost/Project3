@@ -25,9 +25,13 @@ class SellingPlanFactory extends Factory
     {
         return [
             'product_id' => Product::all()->random()->id,
-            'price' => $this->faker->randomDigitNotNull(),
+            'price' => $this->faker->randomDigitNotZero(),
+            'stock' => $this->faker->randomDigitNotZero(),
+            'description' => $this->faker->sentence(),
             'status' => $this->faker->randomElement(ProductSellStatus::getValues()),
             'is_active' => $this->faker->boolean(),
+            'start' => $this->faker->dateTimeThisMonth(),
+            'finish' => $this->faker->dateTimeBetween('now', '1 month'),
         ];
     }
 }

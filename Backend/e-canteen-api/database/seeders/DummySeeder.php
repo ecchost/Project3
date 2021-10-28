@@ -9,10 +9,15 @@ use App\Models\CheckoutItem;
 use App\Models\Payment;
 use App\Models\PaymentMethod;
 use App\Models\Product;
+use App\Models\ProductVariant;
 use App\Models\Review;
+use App\Models\selling_plan;
+use App\Models\SellingPlan;
 use App\Models\Shop;
 use App\Models\ShopAddress;
+use App\Models\SKU;
 use App\Models\User;
+use App\Models\Variant;
 use App\Models\Wishlist;
 use App\Models\WishlistItem;
 use Illuminate\Database\Seeder;
@@ -32,7 +37,10 @@ class DummySeeder extends Seeder
 
         User::factory(3)
             ->has(Shop::factory(1)
-                ->has(Product::factory(random_int(5,10)),'products'),'shops')
+                ->has(Product::factory(random_int(5,10))
+                    ->has(ProductVariant::factory(random_int(1,5)),'variants')
+                    ->has(SKU::factory(1),'skus')
+                    ->has(SellingPlan::factory(random_int(1,3)),'sellPlans'),'products'),'shops')
             ->create();
 
         User::factory(5)

@@ -31,6 +31,18 @@ class Product extends Model
         return $this->hasMany(Review::class);
     }
 
+    public function variants(){
+        return $this->hasMany(ProductVariant::class);
+    }
+
+    public function skus(){
+        return $this->hasMany(SKU::class, );
+    }
+
+    public function sellPlans(){
+        return $this->hasMany(SellingPlan::class);
+    }
+
     protected static function boot()
     {
         parent::boot();
