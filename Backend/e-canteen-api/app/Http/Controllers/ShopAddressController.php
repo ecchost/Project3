@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Classes\BaseResponse\BaseResponse;
 use App\Http\Requests\StoreShopAddress;
+use App\Http\Requests\UpdateShopAddress;
 use App\Http\Resources\ShopAddressResource;
 use App\Http\Resources\ShowShopLocation;
 use App\Models\ShopAddress;
@@ -31,25 +32,16 @@ class ShopAddressController extends Controller
     }
 
 
-    public function show(ShopAddress $shopAddress){
-        $shopAddress->load([
-            'shops'
-        ]);
-
-        return BaseResponse::make(ShowShopLocation::make($shopAddress));
-    }
-
-
-    public function update(StoreShopAddress $request, ShopAddress $shopAddress)
+    public function update(UpdateShopAddress $request, ShopAddress $shopAddress)
     {
         $shopAddress->update($request->validated());
 
         return BaseResponse::make($shopAddress->refresh());
     }
 
-    public function destroy(ShopAddress $shopAddress)
-    {
-        abort_if($shopAddress->shops()->exists(), 403, 'This Location Detail Already Have Shops/Canteen');
-        return BaseResponse::make($shopAddress->delete());
-    }
+//    public function destroy(ShopAddress $shopAddress)
+//    {
+//        abort_if($shopAddress->shops()->exists(), 403, 'This Location Detail Already Have Shops/Canteen');
+//        return BaseResponse::make($shopAddress->delete());
+//    }
 }

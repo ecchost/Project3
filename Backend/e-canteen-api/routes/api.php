@@ -38,10 +38,7 @@ Route::get('wishlist-item', [WishlistController::class,'index']);
 Route::get('reviews', [ReviewController::class, 'index']);
 Route::get('sku', [SKUController::class, 'index']);
 
-Route::apiResource('shop-address', ShopAddressController::class)
-    ->only([
-        'index', 'show'
-    ]);
+Route::get('shop-address', [ShopAddressController::class, 'index']);
 
 Route::apiResource('building', BuildingController::class)
     ->only([
@@ -103,6 +100,7 @@ Route::group(['middleware' => ['auth:sanctum', 'roleLevel:admin']], function () 
             'store', 'destroy'
         ]);
 
+    Route::post('shop-address', [ShopAddressController::class, 'store']);
 
 });
 
@@ -112,6 +110,9 @@ Route::group(['middleware' => ['auth:sanctum', 'roleLevel:merchant']], function 
         ->only([
             'update', 'destroy'
         ]);
+
+    Route::put('shop-address', [ShopAddressController::class, 'update']);
+
 
 
 });

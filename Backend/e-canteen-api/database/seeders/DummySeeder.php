@@ -35,7 +35,7 @@ class DummySeeder extends Seeder
         Building::factory(8)
             ->has(ShopAddress::factory(1),'addresses')->create();
 
-        User::factory(3)
+        User::factory(10)
             ->has(Shop::factory(1)
                 ->has(Product::factory(random_int(5,10))
                     ->has(ProductVariant::factory(random_int(1,5)),'variants')

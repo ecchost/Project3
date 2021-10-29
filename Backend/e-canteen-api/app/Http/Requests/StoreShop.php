@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreShop extends FormRequest
 {
@@ -24,10 +25,22 @@ class StoreShop extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|exists:users,id',
+            'user_id' => [
+              'required' , 'unique:users',
+              Rule::exists('users', 'id')->where(function ($query){
+                  return $query->where('role','merchant');
+              })
+            ],
             'location_id' => 'required|exists:shop_addresses,id',
             'name' => 'required|unique:shops',
             'image' => 'nullable',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'user_id.exists' => 'User must be Merchant Role' ,
         ];
     }
 }

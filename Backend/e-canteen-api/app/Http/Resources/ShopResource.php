@@ -22,7 +22,7 @@ class ShopResource extends JsonResource
                 'location' => ShopAddressResource::make($this->whenLoaded('location')),
                 'food_category' => $this['food_category'],
                 'rating_count' => $this['rating_count']->sum(),
-                'shop_rating' => $this['shop_rating']->sum() / $this['rating_count']->sum(),
+                'shop_rating' => round($this['shop_rating']->sum() / $this['rating_count']->sum(),2),
                 'image' => $this['image'],
                 'is_open' => $this['is_open'],
             ];

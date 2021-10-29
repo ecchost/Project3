@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateShop extends FormRequest
+class UpdateShopAddress extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UpdateShop extends FormRequest
      */
     public function authorize()
     {
-        return $this->route('shop')->user_id === auth()->user()->id;
+        return $this->route('shop-address')->shops->user_id === auth()->user()->id;
     }
 
     /**
@@ -24,9 +24,9 @@ class UpdateShop extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'nullable|unique:shops',
-            'image' => 'nullable',
-            'is_open' => 'nullable|boolean',
+            'building_id' => 'nullable|exist:buildings,id',
+            'floor' => 'nullable|integer|min:0',
+            'specific_location' => 'nullable|min:10'
         ];
     }
 }
