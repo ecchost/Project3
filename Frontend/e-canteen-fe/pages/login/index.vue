@@ -25,6 +25,9 @@
               Password
             </label>
             <b-form-input />
+            <p class="mt-3">Dont have an account? <a
+              href="#"
+              class="text-grey">Register</a></p>
             <div class="text-center mt-5">
               <b-button class="btn-login">
                 Login

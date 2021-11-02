@@ -59,7 +59,7 @@
             <c-product-item :product="product" />
           </b-col>
         </b-row>
-        <router-link to="#">
+        <router-link :to="`/${m_id}`">
           <div class="text-center slide-down">
             <a
               href="javascript:"
@@ -70,6 +70,9 @@
             </a>
           </div>
         </router-link>
+      </div>
+      <div class="flex-center py-5">
+        <c-loading />
       </div>
     </b-container>
   </div>
@@ -107,17 +110,17 @@ export default {
           address: 'Jurusan Akuntansi, Lt. 1 Ak',
           products: [
             {
-              name: 'Mie',
+              name: 'Kuping Gajah Kriuk',
               address: 'Jurusan Akuntansi, Lt. 1 Ak',
               price: 10000,
             },
             {
-              name: 'Nasgor',
+              name: 'Risoles Mayo Legit',
               address: 'Jurusan Akuntansi, Lt. 1 Ak',
               price: 12000,
             },
             {
-              name: 'Cireng',
+              name: 'Kripik Usus Gurih',
               address: 'Jurusan Akuntansi, Lt. 1 Ak',
               price: 5000,
             },
@@ -194,6 +197,10 @@ export default {
         transform: translateY(5px);
       }
     }
+  }
+  .flex-center{
+    display: flex;
+    justify-content: center;
   }
 }
 </style>

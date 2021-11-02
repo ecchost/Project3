@@ -15,7 +15,9 @@
       </p>
     </div>
     <b-row class="nav">
-      <b-col class="text-center">
+      <b-col
+        v-if="!noWish"
+        class="text-center">
         Wish
       </b-col>
       <b-col class="text-center">
@@ -32,6 +34,7 @@
 export default {
   props: {
     product: Object,
+    noWish: Boolean,
   },
 }
 </script>

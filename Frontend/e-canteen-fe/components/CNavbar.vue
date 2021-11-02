@@ -5,7 +5,8 @@
       type="dark">
       <b-container>
         <b-navbar-brand href="/">
-          <b-img src="~/assets/icons/real-estate.svg" />
+          <b-img src="~/assets/images/logo.png" />
+          E-CANTEEN POLINEMA
         </b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse" />
