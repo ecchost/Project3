@@ -1,15 +1,18 @@
 <template>
   <div id="c-product-item">
     <div class="img-container">
-      <b-img src="https://picsum.photos/400" />
+      <b-img src="https://picsum.photos/200" />
     </div>
-    <div class="details">
-      <h5 class="name">
+    <div class="p-3">
+      <h5 class="name fw-5">
         {{ product.name }}
       </h5>
-      <h6 class="price">
-        RP {{ product.price }}
+      <h6 class="text-danger fw-5">
+        RP. {{ product.price }}
       </h6>
+      <p class="fw-2">
+        {{ product.address }}
+      </p>
     </div>
     <b-row class="nav">
       <b-col class="text-center">
@@ -40,21 +43,12 @@ export default {
   .img-container{
     padding: 0;
     max-height: 266px;
+    border-radius: 20px 20px 0 0px;
     img{
       width: 100%;
       height: 100%;
       max-height: 266px;
-      border-radius: 20px 20px 0 0px;
-    }
-  }
-  .details{
-    padding: 1em;
-    .name{
-      font-weight: 700;
-    }
-    .price{
-      color: #F41D1D;
-      font-weight: 700;
+      border-radius: inherit;
     }
   }
   .nav{
