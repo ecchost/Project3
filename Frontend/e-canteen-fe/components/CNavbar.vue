@@ -45,6 +45,7 @@ export default {
   padding: .5em 0;
   position: absolute;
   width: 100%;
+  border-bottom: 1px #97979733 solid;
   .navbar-nav{
     width: 100%;
     .nav-item{
