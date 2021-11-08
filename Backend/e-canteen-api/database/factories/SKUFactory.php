@@ -25,7 +25,8 @@ class SKUFactory extends Factory
         return [
             'product_id' => Product::all()->random()->id,
             'minimum_order' => $this->faker->randomDigitNotZero(),
-            'total_stock' => $this->faker->randomDigitNotZero(),
+            'stock' => $this->faker->randomDigitNotZero(),
+            'price' => $this->faker->randomDigitNotZero(),
         ];
     }
 }

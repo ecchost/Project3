@@ -17,8 +17,6 @@ class CreateProductVariantsTable extends Migration
             $table->bigIncrements('id');
             $table->foreignUuid('product_id')->constrained('products');
             $table->foreignUuid('variant_id')->constrained('variants');
-            $table->integer('price');
-            $table->integer('stock');
             $table->string('value');
             $table->timestamps();
         });

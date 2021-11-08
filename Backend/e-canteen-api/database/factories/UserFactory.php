@@ -34,7 +34,8 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'id_type' => $this->faker->randomElement(UserIdentifierType::getValues()),
             'id_number' => $this->faker->randomDigitNotNull(),
-            'role' => $this->faker->randomElement(UserRoleEnum::getValues())
+            'role' => $this->faker->randomElement(UserRoleEnum::getValues()),
+            'token' => $this->faker->randomDigitNotNull(),
         ];
     }
 

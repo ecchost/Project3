@@ -21,13 +21,14 @@ class ShowProductResource extends JsonResource
                 'shop' => ShopResource::make($this->whenLoaded('shop')),
                 'name' => $this['name'],
                 'slug' => $this['slug'],
-                'price' => $this['price'],
                 'stock' => $this['stock'],
                 'image' => $this['image'],
-                'ratings' => (($this['total_ratings']->sum()) / $this['total_ratings']->count()) ,
-                'availability' => $this['availability'],
+                'variant' => ProductVariantResource::collection($this->whenLoaded('variants')),
+                'ratings' => round(($this['total_ratings']->sum()) / $this['total_ratings']->count(), 2),
                 'description' => $this['description'],
-                'review' => ReviewResource::collection($this->whenLoaded('reviews'))
+                'review' => ReviewResource::collection($this->whenLoaded('reviews')),
+                'sku' => SKUResource::collection($this->whenLoaded('skus')) ,
+                'selling_plan' => SellingPlanResource::collection($this->whenLoaded('sellPlans'))
             ];
         }else{
             return [
@@ -36,13 +37,14 @@ class ShowProductResource extends JsonResource
                 'shop' => ShopResource::make($this->whenLoaded('shop')),
                 'name' => $this['name'],
                 'slug' => $this['slug'],
-                'price' => $this['price'],
                 'stock' => $this['stock'],
                 'image' => $this['image'],
-                'ratings' => 'Not Rated Yet',
-                'availability' => $this['availability'],
+                'variant' => ProductVariantResource::collection($this->whenLoaded('variants')),
+                'ratings' => null,
                 'description' => $this['description'],
-                'review' => ReviewResource::collection($this->whenLoaded('reviews'))
+                'review' => ReviewResource::collection($this->whenLoaded('reviews')),
+                'sku' => SKUResource::collection($this->whenLoaded('skus')) ,
+                'selling_plan' => SellingPlanResource::collection($this->whenLoaded('sellPlans'))
             ];
         }
     }

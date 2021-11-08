@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->enum('id_type', UserIdentifierType::getValues());
             $table->string('id_number');
             $table->enum('role', UserRoleEnum::getValues());
+            $table->integer('token')->default(0);
             $table->timestamps();
         });
     }

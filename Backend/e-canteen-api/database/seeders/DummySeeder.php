@@ -16,6 +16,7 @@ use App\Models\SellingPlan;
 use App\Models\Shop;
 use App\Models\ShopAddress;
 use App\Models\SKU;
+use App\Models\TopUp;
 use App\Models\User;
 use App\Models\Variant;
 use App\Models\Wishlist;
@@ -55,5 +56,7 @@ class DummySeeder extends Seeder
         PaymentMethod::factory(10)
             ->has(Payment::factory(random_int(1,10)),'payments')
             ->create();
+
+        TopUp::factory(10)->create();
     }
 }

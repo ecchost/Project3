@@ -2,24 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\BaseResponse\BaseResponse;
-use App\Http\Resources\ReviewResource;
-use App\Models\Review;
+use App\Models\TopUp;
 use Illuminate\Http\Request;
-use Spatie\QueryBuilder\QueryBuilder;
 
-class ReviewController extends Controller
+class TopUpController extends Controller
 {
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        return ReviewResource::collection(
-            QueryBuilder::for(Review::class)
-                ->with(['product','user'])
-                ->allowedSorts(['ratings'])
-                ->allowedFilters(['ratings'])
-                ->cursorPaginate(10)
-        );
+        //
     }
 
     /**
@@ -43,24 +38,24 @@ class ReviewController extends Controller
         //
     }
 
-
-    public function show(Review $review)
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\TopUp  $topUp
+     * @return \Illuminate\Http\Response
+     */
+    public function show(TopUp $topUp)
     {
-        $review->load([
-           'product.shop',
-           'user'
-        ]);
-
-        return BaseResponse::make(ReviewResource::make($review));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Review  $review
+     * @param  \App\Models\TopUp  $topUp
      * @return \Illuminate\Http\Response
      */
-    public function edit(Review $review)
+    public function edit(TopUp $topUp)
     {
         //
     }
@@ -69,10 +64,10 @@ class ReviewController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Review  $review
+     * @param  \App\Models\TopUp  $topUp
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Review $review)
+    public function update(Request $request, TopUp $topUp)
     {
         //
     }
@@ -80,10 +75,10 @@ class ReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Review  $review
+     * @param  \App\Models\TopUp  $topUp
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Review $review)
+    public function destroy(TopUp $topUp)
     {
         //
     }

@@ -27,8 +27,6 @@ class ProductVariantFactory extends Factory
             'product_id' => Product::all()->random()->id,
             'variant_id' => Variant::all()->random()->id,
             'value' => $this->faker->word(),
-            'price' => $this->faker->randomDigitNotZero(),
-            'stock' => $this->faker->randomDigitNotZero(),
         ];
     }
 }

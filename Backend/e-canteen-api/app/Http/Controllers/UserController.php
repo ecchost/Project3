@@ -3,23 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Classes\BaseResponse\BaseResponse;
-use App\Http\Resources\ReviewResource;
-use App\Models\Review;
+use App\Http\Resources\UserResource;
+use App\Models\TopUp;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class ReviewController extends Controller
+class UserController extends Controller
 {
 
     public function index()
     {
-        return ReviewResource::collection(
-            QueryBuilder::for(Review::class)
-                ->with(['product','user'])
-                ->allowedSorts(['ratings'])
-                ->allowedFilters(['ratings'])
-                ->cursorPaginate(10)
+        return UserResource::collection(
+            QueryBuilder::for(User::class)
+                ->paginate(10)
         );
+    }
+
+    public function topUpForm(Request $request, User $user){
+        abort_if($user->id !== auth()->id(), 403);
+
+        $request->validate([
+            'amount' => 'required|integer',
+            'payment_id' => 'required|exists:payment_method,id',
+            'proof' => 'required|image|mimes:jpeg,png,jpg|max:2000'
+        ]);
+
+        return BaseResponse::make(TopUp::create([
+            'user_id' => auth()->id(),
+            'payment_id' => $request->get('payment_id'),
+            'amount' => $request->get('amount'),
+            'proof' => $request->get('proof')
+        ]));
     }
 
     /**
@@ -43,24 +58,18 @@ class ReviewController extends Controller
         //
     }
 
-
-    public function show(Review $review)
+    public function show(User $user)
     {
-        $review->load([
-           'product.shop',
-           'user'
-        ]);
 
-        return BaseResponse::make(ReviewResource::make($review));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Review  $review
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Review $review)
+    public function edit($id)
     {
         //
     }
@@ -69,10 +78,10 @@ class ReviewController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Review  $review
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Review $review)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -80,10 +89,10 @@ class ReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Review  $review
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Review $review)
+    public function destroy($id)
     {
         //
     }

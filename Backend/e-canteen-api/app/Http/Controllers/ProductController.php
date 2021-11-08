@@ -6,7 +6,10 @@ use App\Classes\BaseResponse\BaseResponse;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ShowProductResource;
 use App\Models\Product;
+use App\Models\Shop;
+use App\Models\SKU;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ProductController extends Controller
@@ -18,29 +21,38 @@ class ProductController extends Controller
             QueryBuilder::for(Product::class)
                 ->with(['category','shop', 'variants.variant', 'sellPlans', 'skus'])
                 ->allowedFilters(['price','stock','availability'])
-                ->cursorPaginate(10)
+                ->Paginate(10)
         );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    public function product(Shop $shop, Request $request){
+        abort_if($shop['user_id'] !== auth()->id(),403, 'Only Shop Keeper have this access');
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        $validated =  $request->validate([
+           'category_id' => 'required|exists:categories,id',
+           'name' => 'required|unique:products,name',
+            'image' => 'nullable',
+            'description' => 'nullable'
+        ]);
+
+        $product = Product::create($validated +
+            ['shop_id' => $shop->id,
+            ]);
+
+
+        BaseResponse::make($product);
+
+        $lastID = $product->id;
+
+        BaseResponse::make(SKU::create([
+            'product_id' => $lastID,
+            'default_sku' => 1,
+            'minimum_order' => $request->get('minimum_order'),
+            'stock' => $request->get('stock'),
+            'price' => $request->get('price'),
+            'is_available' => $request->get('is_available'),
+        ]));
+
     }
 
 
@@ -49,22 +61,15 @@ class ProductController extends Controller
         $product->load([
             'category',
             'shop',
-            'reviews.user'
+            'reviews.user',
+            'variants.variant',
+            'sellPlans',
+            'skus'
         ]);
 
         return BaseResponse::make(ShowProductResource::make($product));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-
-    }
 
     /**
      * Update the specified resource in storage.
@@ -73,9 +78,28 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Shop $shop,  Product $product, SKU $sku)
     {
-        //
+        abort_if($shop['user_id'] !== auth()->id(),403, 'Only Shop Keeper have this access');
+
+        $validated =  $request->validate([
+            'category_id' => 'nullable|exists:categories,id',
+            'name' => 'nullable|unique:products,name',
+            'image' => 'nullable',
+            'description' => 'nullable'
+        ]);
+
+        $product->update($validated + [
+                'slug' => Str::slug($request->get('name')),
+            ]);
+
+        $sku->update([
+            'minimum_order' => $request->get('minimum_order'),
+            'stock' => $request->get('stock'),
+            'price' => $request->get('price'),
+            'is_available' => $request->get('is_available'),
+        ]);
+
     }
 
     /**

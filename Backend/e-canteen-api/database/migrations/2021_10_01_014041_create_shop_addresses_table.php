@@ -17,7 +17,7 @@ class CreateShopAddressesTable extends Migration
             $table->bigIncrements('id');
             $table->foreignId('building_id')->constrained('buildings');
             $table->integer('floor');
-            $table->string('specific_location');
+            $table->string('specific_location')->nullable();
             $table->timestamps();
         });
     }

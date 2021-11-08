@@ -19,7 +19,8 @@ class UserResource extends JsonResource
             'name' => $this['name'],
             'id_type' => $this['id_type'],
             'id_number' => $this['id_number'],
-            'role' => $this['role']
+            'role' => $this['role'],
+            'token' => $this['token']
         ];
     }
 }

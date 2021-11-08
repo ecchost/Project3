@@ -18,8 +18,6 @@ class ProductVariantResource extends JsonResource
             'id' => $this['id'],
             'variant' => VariantResource::make($this->whenLoaded('variant')),
             'value' => $this['value'],
-            'stock' => $this['stock'],
-            'price' => $this['price'],
             'product' => ProductResource::make($this->whenLoaded('product')),
         ];
     }

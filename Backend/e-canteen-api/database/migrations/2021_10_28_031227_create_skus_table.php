@@ -16,8 +16,10 @@ class CreateSKUSTable extends Migration
         Schema::create('skus', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('product_id')->constrained('products');
+            $table->boolean('default_sku')->default(true);
             $table->integer('minimum_order');
-            $table->integer('total_stock');
+            $table->integer('price');
+            $table->integer('stock');
             $table->boolean('is_available')->default(true);
             $table->softDeletes();
             $table->timestamps();

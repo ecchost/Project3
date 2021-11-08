@@ -16,6 +16,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ShopAddressController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\SKUController;
+use App\Http\Controllers\ProductVariantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -112,6 +113,12 @@ Route::group(['middleware' => ['auth:sanctum', 'roleLevel:merchant']], function 
         ]);
 
     Route::put('shop-address', [ShopAddressController::class, 'update']);
+
+    Route::post('shop/{shop:slug}/product', [ProductController::class, 'product']);
+
+    Route::put('shop/{shop:slug}/product/{product:slug}/{sku:slug}', [ProductController::class, 'update']);
+
+    Route::post('shop/{shop:slug}/product/{product:slug}/variant', [ProductVariantController::class, 'variant']);
 
 
 

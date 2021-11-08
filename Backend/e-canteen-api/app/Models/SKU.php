@@ -13,6 +13,14 @@ class SKU extends Model
 
     protected $table = 'skus';
 
+    protected $fillable = [
+        'product_id', 'minimum_order', 'stock', 'is_available', 'price', 'default_sku'
+    ];
+
+    protected $casts = [
+        'is_available' => 'boolean'
+    ];
+
     public function product(){
         return $this->belongsTo(Product::class);
     }

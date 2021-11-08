@@ -28,7 +28,6 @@ class ProductFactory extends Factory
             'shop_id' => Shop::all()->random()->id,
             'name' => $this->faker->word(),
             'slug' => $this->faker->slug(),
-            'price' => $this->faker->randomDigitNotZero(),
             'image' => $this->faker->imageUrl(),
             'description' => $this->faker->sentence(),
         ];

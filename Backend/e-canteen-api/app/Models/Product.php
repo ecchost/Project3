@@ -11,8 +11,12 @@ class Product extends Model
 {
     use HasFactory, UuidIndex;
 
+    protected $fillable = [
+        'category_id', 'name', 'shop_id' , 'slug', 'image', 'description'
+    ];
+
     public function category(){
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function shop(){
@@ -36,7 +40,7 @@ class Product extends Model
     }
 
     public function skus(){
-        return $this->hasMany(SKU::class, );
+        return $this->hasMany(SKU::class);
     }
 
     public function sellPlans(){

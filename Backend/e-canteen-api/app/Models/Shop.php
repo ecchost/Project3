@@ -40,9 +40,12 @@ class Shop extends Model
     }
 
     protected function getFoodCategoryAttribute(){
-        return $this->products->map(function (Product $product){
+        $category = $this->products->map(function (Product $product){
             return $product->category['name'];
         });
+
+        $flattened = $category->unique()->values()->all();
+        return $flattened;
     }
 
     protected function getRatingCountAttribute(){

@@ -19,9 +19,8 @@ class CreateProductsTable extends Migration
             $table->foreignUuid('shop_id')->constrained();
             $table->string('name');
             $table->string('slug');
-            $table->integer('price');
-            $table->string('image');
-            $table->string('description');
+            $table->string('image')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
